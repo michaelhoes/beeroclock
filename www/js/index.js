@@ -4,7 +4,6 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
-        setCheckInterval();
     },
     // Bind Event Listeners
     //
@@ -19,6 +18,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        setCheckInterval();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -44,7 +44,7 @@ function getBeerOClockTime() {
     nextboc.setHours(nextboc.getHours() - 12); // beer o'clock has a duration of 12 hours
 
     var maxtry = 7;
-    while (nextboc.getDay() != 0 && maxtry > 0) { // =friday
+    while ((nextboc.getDay() != 5 && nextboc.getDay() != 6 && nextboc.getDay() != 0) && maxtry > 0) { // =friday, saterday or sunday
         nextboc.setDate(nextboc.getDate() + 1);
         maxtry -= 1;
     }
