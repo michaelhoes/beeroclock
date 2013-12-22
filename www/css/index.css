@@ -26,13 +26,15 @@ body {
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
     background:url('../img/bg.jpg') repeat-y;
     background-size:100% auto;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:12px;
+    /*font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;*/
+    font-family: 'fff_tusjbold', sans-serif;
+    font-size:14px;
     height:100%;
     margin:0px;
     padding:0px;
     text-transform:uppercase;
     width:100%;
+    color:#222222;
 }
 
 .app {
@@ -68,5 +70,16 @@ h3 {
     text-align:center;
     background:url('../img/beerplate.png') no-repeat center center;
 }
+
+    .beerplate.withbeer {
+        background:url('../img/beerplate-with-beer.png') no-repeat center center;
+    }
+
+        .beerplate.withbeer h2 {
+            color:#000000;
+            font-size:2.3em;
+            line-height:150%;
+            margin-top:50px;
+        }
 
 

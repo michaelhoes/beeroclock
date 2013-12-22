@@ -22,18 +22,23 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="fonts/ffftusj_bold_macroman/stylesheet.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <title>Beer O'Clock</title>
     </head>
     <body>
         <div class="app">
-            <h1>Beer 'O Clock</h1>
-            <div class="beerplate">
-                <h2>Friday 05:00PM</h2>
-                <h3>2 day and 17 hours to go</h3>
+            <h1>Beer O'Clock?</h1>
+            <div id="pnlNo" class="beerplate">
+                <h2 class="title-alarm">Friday 04:00PM</h2>
+                <h3 class="title-timetogo"><!--2 day and 17 hours to go--></h3>
+            </div>
+            <div id="pnlYes" class="beerplate withbeer" style="display:none;">
+                <h2>It's time.<br />Drink up!</h2>
             </div>
         </div>
         <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();

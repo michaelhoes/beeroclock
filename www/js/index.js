@@ -1,25 +1,10 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
+﻿var checkInterval;
+
 var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        setCheckInterval();
     },
     // Bind Event Listeners
     //
@@ -47,3 +32,60 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+function setCheckInterval() {
+    checkTime();
+    checkInterval = setInterval("checkTime()", 5000);
+}
+
+function getBeerOClockTime() {
+    var now = new Date();
+    var nextboc = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16);
+    nextboc.setHours(nextboc.getHours() - 12); // beer o'clock has a duration of 12 hours
+
+    var maxtry = 7;
+    while (nextboc.getDay() != 0 && maxtry > 0) { // =friday
+        nextboc.setDate(nextboc.getDate() + 1);
+        maxtry -= 1;
+    }
+
+    nextboc.setHours(nextboc.getHours() + 12) // add 12 hours back
+
+    return nextboc;
+}
+
+function checkTime() {
+    
+    var nextboc = getBeerOClockTime();
+
+    if (getBeerOClockTime() <= new Date()) {
+        $("#pnlNo").hide();
+        $("#pnlYes").show();
+
+        navigator.notification.beep(3);
+        navigator.notification.vibrate(2000);
+    } else {
+        $("#pnlYes").hide();
+        $("#pnlNo").show();
+
+        var today = new Date();
+        var diffMs = (nextboc - today); // milliseconds between now & Christmas
+        var diffDays = Math.round(diffMs / 86400000); // days
+        var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours
+        var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+        var durationtxt = "";
+        if (diffDays > 0) {
+            durationtxt = diffDays + " " + (diffDays == 1 ? "day" : "days") + " - " + diffHrs + " hours";
+        } else {
+            durationtxt = diffHrs + " hours - " + diffMins + " minutes";
+        }
+        $("#pnlNo .title-timetogo").text(durationtxt);
+
+    }
+}
+
+//function calculateDifferenceInDays(date1, date2) {
+//    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+//    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+//    return diffDays;
+//}
