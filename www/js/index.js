@@ -4,6 +4,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        setCheckInterval();
     },
     // Bind Event Listeners
     //
@@ -34,8 +35,8 @@ var app = {
 };
 
 function setCheckInterval() {
-    checkTime();
-    checkInterval = setInterval("checkTime()", 5000);
+    //checkTime();
+    checkInterval = setInterval("checkTime()", 2000);
 }
 
 function getBeerOClockTime() {
